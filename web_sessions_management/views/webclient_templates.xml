@@ -1,4 +1,4 @@
-<openerp>
+<odoo>
     <data>
 
         <template id="web_login" inherit_id="web.login">
@@ -16,4 +16,4 @@
         </template>
 
     </data>
-</openerp>
+</odoo>

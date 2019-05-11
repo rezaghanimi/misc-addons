@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 #
 #
-#    OpenERP, Open Source Management Solution
+#    odoo, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    ThinkOpen Solutions Brasil
@@ -23,7 +23,7 @@
 #
 
 import logging
-import openerp
+import odoo
 import werkzeug.contrib.sessions
 import werkzeug.datastructures
 import werkzeug.exceptions
@@ -31,13 +31,13 @@ import werkzeug.local
 import werkzeug.routing
 import werkzeug.wrappers
 import werkzeug.wsgi
-from openerp.http import request
-from openerp.tools.func import lazy_property
+from odoo.http import request
+from odoo.tools.func import lazy_property
 #
 _logger = logging.getLogger(__name__)
 
 
-class OpenERPSession(openerp.http.OpenERPSession):
+class odooSession(odoo.http.odooSession):
 
     def logout(self, keep_db=False, logout_type=None, env=None):
         try:
@@ -49,18 +49,18 @@ class OpenERPSession(openerp.http.OpenERPSession):
             session = env['ir.sessions'].sudo().search([('session_id', '=', self.sid)])
             if session:
                 session._on_session_logout(logout_type)
-        return super(OpenERPSession, self).logout(keep_db=keep_db)
+        return super(odooSession, self).logout(keep_db=keep_db)
 
 
-class RootTkobr(openerp.http.Root):
+class RootTkobr(odoo.http.Root):
 
     @lazy_property
     def session_store(self):
         # Setup http sessions
-        path = openerp.tools.config.session_dir
+        path = odoo.tools.config.session_dir
         _logger.debug('HTTP sessions stored in: %s', path)
-        return werkzeug.contrib.sessions.FilesystemSessionStore(path, session_class=OpenERPSession)
+        return werkzeug.contrib.sessions.FilesystemSessionStore(path, session_class=odooSession)
 
 
 root = RootTkobr()
-openerp.http.root.session_store = root.session_store
+odoo.http.root.session_store = root.session_store

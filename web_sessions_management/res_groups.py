@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 #
 #
-#    OpenERP, Open Source Management Solution
+#    odoo, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    ThinkOpen Solutions Brasil
@@ -22,8 +22,8 @@
 #
 #
 
-from openerp import fields
-from openerp import models
+from odoo import fields
+from odoo import models
 
 
 class ResGroups(models.Model):

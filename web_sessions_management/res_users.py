@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 #
 #
-#    OpenERP, Open Source Management Solution
+#    odoo, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    ThinkOpen Solutions Brasil
@@ -22,13 +22,13 @@
 #
 #
 
-from openerp import fields
-from openerp import models
+from odoo import fields
+from odoo import models
 from datetime import datetime
-from openerp import SUPERUSER_ID
-from openerp.http import request
-from openerp.addons.base.models.ir_cron import _intervalTypes
-from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from odoo import SUPERUSER_ID
+from odoo.http import request
+from odoo.addons.base.models.ir_cron import _intervalTypes
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class ResUsers(models.Model):

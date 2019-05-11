@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 #
 #
-#    OpenERP, Open Source Management Solution
+#    odoo, Open Source Management Solution
 #    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    ThinkOpen Solutions Brasil
@@ -23,26 +23,26 @@
 #
 
 import logging
-import openerp
-from openerp import fields
-from openerp import SUPERUSER_ID
-from openerp.http import request
-from openerp import http
+import odoo
+from odoo import fields
+from odoo import SUPERUSER_ID
+from odoo.http import request
+from odoo import http
 
 _logger = logging.getLogger(__name__)
 
 
-class HomeTkobr(openerp.addons.web.controllers.main.Home):
+class HomeTkobr(odoo.addons.web.controllers.main.Home):
 
     @http.route('/web/login', type='http', auth="none")
     def web_login(self, redirect=None, **kw):
-        openerp.addons.web.controllers.main.ensure_db()
+        odoo.addons.web.controllers.main.ensure_db()
 
         if request.httprequest.method == 'GET' and redirect and request.session.uid:
             return http.redirect_with_hash(redirect)
 
         if not request.uid:
-            request.uid = openerp.SUPERUSER_ID
+            request.uid = odoo.SUPERUSER_ID
 
         values = request.params.copy()
         if not redirect:
@@ -51,7 +51,7 @@ class HomeTkobr(openerp.addons.web.controllers.main.Home):
 
         try:
             values['databases'] = http.db_list()
-        except openerp.exceptions.AccessDenied:
+        except odoo.exceptions.AccessDenied:
             values['databases'] = None
 
         if request.httprequest.method == 'POST':
@@ -70,7 +70,7 @@ class HomeTkobr(openerp.addons.web.controllers.main.Home):
 
     def save_session(self, cr, uid, context=None):
         if not request.uid:
-            request.uid = openerp.SUPERUSER_ID
+            request.uid = odoo.SUPERUSER_ID
         sid = request.httprequest.session.sid
         uid = request.httprequest.session.uid
         session_obj = request.registry.get('ir.sessions')
